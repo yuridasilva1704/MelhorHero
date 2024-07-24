@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Ódio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #004494;
+        }
+
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading {
+            display: none;
+            font-size: 1.2em;
+        }
+
+        .bar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .bar {
+            height: 30px; /* Aumentei a altura das barras */
+            width: 150px; /* Aumentei a largura das barras */
+            margin: 5px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .bar span {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Efeito de neve */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(0);
+            }
+            100% {
+                transform: translateY(100vh) translateX(30px);
+            }
+        }
+
+        /* Estilo das legendas */
+        .legend-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .legend {
+            margin: 0 12px;
+            font-size: 12px; /* Ajustado para melhor visibilidade */
+            color: black; /* Cor preta */
+        }
+
+        .legend.red {
+            color: black; /* Cor preta para indicar nível de ódio */
+        }
+
+        .legend.green {
+            color: black; /* Cor preta para indicar sem ódio */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button onclick="calculateLove()">Cálculo de Ódio com Vitória</button>
+        <div id="loading" class="loading">Calculando...</div>
+        <div id="result">
+            <p>Resultado: Yuri não tem ódio de você, Vitória!</p>
+            <img src="https://i.pinimg.com/originals/7d/3c/d6/7d3cd65da2182b47531a82c7391c97c0.jpg" alt="Gato fofo com flor">
+            <div class="bar-container">
+                <div class="bar red" id="hateBar"><span id="hatePercentage"></span></div>
+                <div class="bar green" id="loveBar"><span id="lovePercentage"></span></div>
+            </div>
+            <!-- Adicionando a legenda -->
+            <div class="legend-container">
+                <div class="legend red">Ódio</div>
+                <div class="legend green">Sem Ódio</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicionando o elemento de áudio -->
+    <audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
+
+    <!-- Criando o efeito de neve -->
+    <script>
+        function createSnowflakes() {
+            for (let i = 0; i < 100; i++) {
+                let snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = 5 + Math.random() * 10 + 's';
+                snowflake.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(snowflake);
+            }
+        }
+
+        function calculateLove() {
+            document.querySelector('button').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+
+                const hatePercentage = Math.floor(Math.random() * 16); // 0% - 15%
+                const lovePercentage = 100 - hatePercentage; // Garante que a soma seja 100%
+
+                document.getElementById('hateBar').style.width = `${hatePercentage}%`;
+                document.getElementById('loveBar').style.width = `${lovePercentage}%`;
+                document.getElementById('hatePercentage').innerText = `${hatePercentage}%`;
+                document.getElementById('lovePercentage').innerText = `${lovePercentage}%`;
+
+                // Inicia o efeito de neve
+                createSnowflakes();
+
+                // Inicia o áudio de fundo
+                document.getElementById('audio').play();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
