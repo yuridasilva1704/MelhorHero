@@ -148,8 +148,8 @@
             <p>Resultado: Yuri não tem ódio de você, Vitória!</p>
             <img src="https://i.pinimg.com/originals/7d/3c/d6/7d3cd65da2182b47531a82c7391c97c0.jpg" alt="Gato fofo com flor">
             <div class="bar-container">
-                <div class="bar red" id="hateBar"><span id="hatePercentage"></span></div>
-                <div class="bar green" id="loveBar"><span id="lovePercentage"></span></div>
+                <div class="bar red" id="hateBar"><span id="hatePercentage">NÃO TEM</span></div>
+                <div class="bar green" id="loveBar"><span id="lovePercentage">100%</span></div>
             </div>
             <!-- Adicionando a legenda -->
             <div class="legend-container">
@@ -183,13 +183,11 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('result').style.display = 'block';
 
-                const hatePercentage = Math.floor(Math.random() * 16); // 0% - 15%
-                const lovePercentage = 100 - hatePercentage; // Garante que a soma seja 100%
-
-                document.getElementById('hateBar').style.width = `${hatePercentage}%`;
-                document.getElementById('loveBar').style.width = `${lovePercentage}%`;
-                document.getElementById('hatePercentage').innerText = `${hatePercentage}%`;
-                document.getElementById('lovePercentage').innerText = `${lovePercentage}%`;
+                // Sempre define a porcentagem de ódio como 0% e amor como 100%
+                document.getElementById('hateBar').style.width = '0%';
+                document.getElementById('loveBar').style.width = '100%';
+                document.getElementById('hatePercentage').innerText = 'NÃO TEM';
+                document.getElementById('lovePercentage').innerText = '100%';
 
                 // Inicia o efeito de neve
                 createSnowflakes();
